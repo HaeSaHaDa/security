@@ -1,34 +1,36 @@
-package com.example.securityTest.security.dto;
+package com.example.securityTest.security.model;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-public class SecurityUser implements UserDetails {
+public class User implements UserDetails {
 
-    private final User user;
+    private final String username;
+    private final String password;
+    private final String authority;
 
-    public SecurityUser(User user){
-        this.user  = user;
+    public User(String username, String password, String authority) {
+        this.username = username;
+        this.password = password;
+        this.authority = authority;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities();
+        return List.of(()->authority);
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return username;
     }
 
     @Override
