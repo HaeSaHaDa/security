@@ -1,4 +1,4 @@
-package com.example.securityTest.security.config;
+package com.example.securityTest.security.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +16,12 @@ public class UserManagementConfig {
 
         auth.authenticationProvider(authenticationProvider);
 
-//        auth.inMemoryAuthentication()
-//                .withUser("jhon")
-//                .password("12345")
-//                .authorities("ROLE_USER")
-//                .and()
-//                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.inMemoryAuthentication()
+                .withUser("jhon")
+                .password("12345")
+                .authorities("ROLE_USER")
+                .and()
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
 
 //        var userDetailService = new InMemoryUserDetailsManager();
 //        UserDetails user1 = new User("Jhon", "12345", List.of(new SimpleGrantedAuthority("ROLE_USER")));
