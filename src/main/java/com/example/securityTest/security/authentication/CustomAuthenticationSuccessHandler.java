@@ -26,10 +26,11 @@ public class CustomAuthenticationSuccessHandler
 
         var auth =
                 authorities.stream()
-                        .filter(a -> a.getAuthority().equals("manage"))
+                        .filter(a -> a.getAuthority().equals("read"))
                         .findFirst();
 
-        System.out.println("auth: " + auth);
+        System.out.println("success");
+
 
         if (auth.isPresent()) {
             response

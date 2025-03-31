@@ -1,8 +1,11 @@
 package com.example.securityTest.security.config;
 
+import com.example.securityTest.security.authentication.CustomAuthenticationFailureHandler;
+import com.example.securityTest.security.authentication.CustomAuthenticationSuccessHandler;
 import com.example.securityTest.security.model.User;
 import com.example.securityTest.security.service.InMemoryUserDetailsService;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +21,12 @@ import java.util.List;
 @Configuration
 public class ProjectConfig {
 
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+
+    @Autowired
+    private CustomAuthenticationFailureHandler authenticationFailureHandler;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -60,7 +69,9 @@ public class ProjectConfig {
 
         http.formLogin(form -> {
             form
-                    .defaultSuccessUrl("/home", true);
+                    .successHandler(authenticationSuccessHandler)
+                    .failureHandler(authenticationFailureHandler);
+
         });
 
         http.authorizeHttpRequests(auth -> auth

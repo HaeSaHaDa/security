@@ -18,7 +18,7 @@ public class HomeController {
         return "home.html";
     }
 
-    @GetMapping("/error")
+    @GetMapping("/none")
     public String error(){
 
         return "error.html";
